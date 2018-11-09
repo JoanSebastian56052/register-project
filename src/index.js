@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import RouteExample from './RouteExample'
-import Registro from './Registro'
 
 const app = document.getElementById('root');
 //ReactDOM.render(<Paciente />, app);

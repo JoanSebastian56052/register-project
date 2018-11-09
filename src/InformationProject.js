@@ -11,7 +11,7 @@ class InformationProject extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			nameProject: null,
+			nameProject: "",
 			descriptionProject: null,
 			problemSolve: null,
 			valueEcosystem: null,
@@ -20,7 +20,8 @@ class InformationProject extends Component {
 			duration: null,
 			budget: null,
 			objectiveGeneral: null,
-			expectedResults: null
+			expectedResults: null,
+			isfull: false
 		};
 		this.isComplete = this.isComplete.bind(this);
 		this.takeNameProject = this.takeNameProject.bind(this);
@@ -77,7 +78,7 @@ class InformationProject extends Component {
 
 
 	isComplete() {
-		if(this.state.nameProject !== null) {
+		if(this.state.nameProject.length !== 0) {
 			if(this.state.descriptionProject !== null) {
 				if(this.state.problemSolve !== null) {
 					if(this.state.valueEcosystem !== null) {
@@ -87,7 +88,8 @@ class InformationProject extends Component {
 									if(this.state.budget !== null) {
 										if(this.state.objectiveGeneral !== null) {
 											if(this.state.expectedResults !== null) {
-												let newValue = true;
+												this.setState({isfull: true});
+												let newValue = this.state;
 												this.props.getIsFullProjects(newValue);
 											}  else {
 												alert("El campo resultados esperados del proyecto es obligatorio");
@@ -150,14 +152,11 @@ class InformationProject extends Component {
 		return(
 				<div>
 				<tr>
-					Informacion inicial del Proyecto:
-				</tr>
-				<tr>
 					<td>
 						<font color="red">*</font>Nombre corto del proyecto o iniciativa:
 					</td>
 					<td>
-						<input type="text" placeholder="Nombre Proyecto" onChange={this.takeNameProject} onFocus={this.value=""}/>
+						<input type="text" placeholder="Nombre Proyecto"  onChange={this.takeNameProject} onFocus={this.value=""}/>
 					</td>
 				</tr>
 				<tr>

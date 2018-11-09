@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
+
 class InformationEntities extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			nature: null,
 			type: null,
-			nameEntity: null,
-			nitEntity: null,
-			nameLeader: null,
-			ocupationLeader: null,
-			emailLeader: null,
-			phoneLeader: null,
-			nameEntityA: null,
-			nitEntityA: null,
-			nameGroup: null,
+			nameEntity: "",
+			nitEntity: "",
+			nameLeader: "",
+			ocupationLeader: "",
+			emailLeader: "",
+			phoneLeader: "",
+			nameEntityA: "",
+			nitEntityA: "",
+			nameGroup: "",
+			isfull: false
 		}
 		this.takeNature = this.takeNature.bind(this);
 		this.takeType = this.takeType.bind(this);
@@ -28,6 +30,15 @@ class InformationEntities extends Component {
 		this.takeNitEntityA = this.takeNitEntityA.bind(this);
 		this.takeNameGroup = this.takeNameGroup.bind(this);
 		this.isComplete = this.isComplete.bind(this);
+		this.esNumerico = this.esNumerico.bind(this);
+	}
+	esNumerico(newValue) {
+		let numerico = false;
+		if (!/^([0-9])*$/.test(newValue)) {
+		} else {
+			numerico = true;
+		}
+		return numerico;
 	}
 
 	takeNature(e) {
@@ -74,20 +85,20 @@ class InformationEntities extends Component {
 		this.setState({nameGroup: e.target.value})
 	}
 	isComplete() {
-
+		console.log(this.state);
 		if(this.state.nature !== null) {
 			if(this.state.type !== null) {
-				if(this.state.nameEntity !== null) {
-					if(this.state.nitEntity !== null) {
-						if(this.state.nameLeader !== null) {
-							if(this.state.ocupationLeader !== null) {
-								if(this.state.emailLeader !== null) {
-									if(this.state.phoneLeader !== null) {
-										if(this.state.nameEntityA !== null) {
-											if(this.state.nitEntityA !== null) {
-												if (this.state.nameGroup !== null) {
-													let newValue = true;
-													this.props.getIsFullEntities(newValue)
+				if(this.state.nameEntity.length !== 0) {
+					if(this.state.nitEntity.length !== 0 && this.esNumerico(this.state.nitEntity) === true) {
+						if(this.state.nameLeader.length !== 0) {
+							if(this.state.ocupationLeader.length !== 0) {
+								if(this.state.emailLeader.length !== 0) {
+									if(this.state.phoneLeader.length !== 0 && this.esNumerico(this.state.phoneLeader) === true) {
+										if(this.state.nameEntityA.length !== 0 ) {
+											if(this.state.nitEntityA.length !== 0 && this.esNumerico(this.state.nitEntityA) === true) {
+												if (this.state.nameGroup.length !== 0) {
+													this.setState({isfull: true});
+													this.props.getIsFullEntities(this.state);
 												} else {
 													alert("El campo nombre del grupo asociado es obligatorio");
 												}
@@ -98,7 +109,7 @@ class InformationEntities extends Component {
 											alert("El campo nombre de la entidad asociada es obligatorio");
 										}
 									} else {
-										alert("El campo telefono del lider del proyecto es obligatorio");
+										alert("El campo telefono del lider del proyecto es obligatorio o debes ingresar un numero de telefono valido");
 									}
 								} else {
 									alert("El campo e-mail del lider del proyecto es obligatorio");
@@ -110,7 +121,7 @@ class InformationEntities extends Component {
 							alert("El campo nombre del lider del proyecto es obligatorio");
 						}
 					} else {
-						alert("El campo NIT de la entidad proponente del proyecto es obligatorio");
+						alert("El campo NIT de la entidad proponente del proyecto es obligatorio o debes ingresar un dato numerico");
 					}
 				} else {
 					alert("El campo nombre de la entidad proponente del proyecto es obligatorio");
@@ -128,14 +139,11 @@ class InformationEntities extends Component {
 		return(
 				<div>
 					<tr>
-						Información Inicial de la(s) entidades:
-					</tr>
-					<tr>
 						<td>
 							&nbsp;&nbsp;<font color="red">*</font>ID Proyecto: 
 						</td>
 						<td>
-							<input type="text" placeholder="1"/>
+							<input type="text" placeholder="1" />
 						</td>
 					</tr>
 					<tr>
@@ -170,7 +178,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>Nombre de la entidad proponente principal: 
 						</td>
 						<td>
-							<input type="text" placeholder="Nombre Entidad" onChange={this.takeNameEntity} onFocus={this.value=""}/>
+							<input type="text" placeholder="Nombre Entidad" onChange={this.takeNameEntity} value={this.state.nameEntity}/>
 						</td>
 					</tr>
 					<tr>
@@ -178,7 +186,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>NIT (sin dígito verificación):
 						</td>
 						<td>
-							<input type="text" placeholder="NIT" onChange={this.takeNitEntity} onFocus={this.value=""}/>
+							<input type="text" placeholder="NIT" onChange={this.takeNitEntity} value={this.state.nitEntity}/>
 						</td>
 					</tr>
 					<tr>
@@ -186,7 +194,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>Nombre lider del proyecto:
 						</td>
 						<td>
-							<input type="text" placeholder="Nombre Lider" onChange={this.takeNameLeader} onFocus={this.value=""}/>
+							<input type="text" placeholder="Nombre Lider" onChange={this.takeNameLeader} value={this.state.nameLeader}/>
 						</td>
 					</tr>
 					<tr>
@@ -194,7 +202,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>Cargo lider del proyecto:
 						</td>
 						<td>
-							<input type="text" placeholder="Cargo Lider" onChange={this.takeOcupationLeader} onFocus={this.value=""}/>
+							<input type="text" placeholder="Cargo Lider" onChange={this.takeOcupationLeader} value={this.state.ocupationLeader}/>
 						</td>
 					</tr>
 					<tr>
@@ -202,7 +210,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>Correo electrónico institucional lider del proyecto (Proponente principal):
 						</td>
 						<td>
-							<input type="text" placeholder="e-mail" onChange={this.takeEmailLeader} onFocus={this.value=""}/>
+							<input type="text" placeholder="e-mail" onChange={this.takeEmailLeader} value={this.state.emailLeader}/>
 						</td>
 					</tr>
 					<tr>
@@ -210,7 +218,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>Teléfono lider del proyecto (Proponente principal):
 						</td>
 						<td>
-							<input type="text" placeholder="Teléfono" onChange={this.takePhoneLeader}/>
+							<input type="text" placeholder="Teléfono" onChange={this.takePhoneLeader} value={this.state.phoneLeader}/>
 						</td>
 					</tr>
 					<tr>
@@ -218,7 +226,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>Nombre de la entidad aliada (Incluir nit de cada aliado cuando aplique):
 						</td>
 						<td>
-							<input type="text" placeholder="name" onChange={this.takeNameEntityA} onFocus={this.value=""}/>
+							<input type="text" placeholder="name" onChange={this.takeNameEntityA} value={this.state.nameEntityA}/>
 						</td>
 					</tr>
 					<tr>
@@ -226,7 +234,7 @@ class InformationEntities extends Component {
 	        				&nbsp;&nbsp;<font color="red">*</font>NIT (sin dígito verificación):
 						</td>
 						<td>
-							<input type="text" placeholder="NIT" onChange={this.takeNitEntityA} onFocus={this.value=""}/>
+							<input type="text" placeholder="NIT" onChange={this.takeNitEntityA} value={this.state.nitEntityA}/>
 						</td>
 					</tr>
 					<tr>
@@ -234,7 +242,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>Nombre del grupo de investigación participante del proyecto:
 						</td>
 						<td>
-							<input type="text" placeholder="name" onChange={this.takeNameGroup} onFocus={this.value=""}/>
+							<input type="text" placeholder="name" onChange={this.takeNameGroup} value={this.state.nameGroup}/>
 						</td>
 					</tr>
 					<br/>

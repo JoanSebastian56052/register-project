@@ -3,7 +3,8 @@
 }
 
 .Appform {
-  text-align: right;
+  text-align: center;
+  float: center;
 }
 
 .App-logo {
@@ -21,6 +22,9 @@
 .App-intro {
   font-size: 12px;
 }
+.coming_soon {
+  text-align: center;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
@@ -32,19 +36,31 @@
 }
 
 .App-tablas {
-  width: 0 auto;
+  width: 1000px;
   margin: 0 auto;
   border: 1px solid;
   border-spacing: 1px;
   border-collapse: initial;
+  vertical-align: middle;
+}
+.App-tablas-final {
+  width: 1000px;
+  margin: 0 auto;
+  border: 1px solid;
+  border-spacing: 1px;
+  border-collapse: initial;
+  vertical-align: middle;
 }
 .App-tablas td{
+  width: 500px;
     text-align: center;
+    vertical-align: middle;
 }
 .App-tablas thead {
     text-align: center;
 }
 .App-tablas tr {
+  margin: 0 auto;
   height: 40px
 }
 .App-tablas tr:nth-child(even) { 
@@ -52,13 +68,54 @@
 }
 .App-tablas tr:nth-child(odd) { 
   background: #fff
-}
-.contenedor{
-  display: inline-block;
-  min-width: 100px;
+} 
+
+.App-tablas thead:nth-child(odd) { 
+  background: #ddd;
 }
 
-.texto{
-  background-color: red;
-  width: 100%;
+.App-tablas th {
+  text-align: center;
+  height: 40px;
+  vertical-align: middle;
+}
+.App-tablas-final td{
+    width: 500px;
+    text-align: center;
+    vertical-align: middle;
+}
+.App-tablas-final thead {
+    text-align: center;
+}
+.App-tablas-final tr {
+  margin: 0 auto;
+  height: 40px
+}
+.App-tablas-final tr:nth-child(even) { 
+  background: #ddd
+}
+.App-tablas-final tr:nth-child(odd) { 
+  background: #fff
+} 
+
+.App-tablas-final thead:nth-child(odd) { 
+  background: #ddd;
+}
+
+.App-tablas-final th {
+  text-align: center;
+  height: 40px;
+  vertical-align: middle;
+}
+
+.radio {
+  text-align: left;
+}
+
+.App-tablas input {
+  width:0 auto;
+}
+
+.login {
+  float: right;
 }

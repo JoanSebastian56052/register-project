@@ -12,12 +12,6 @@ class App extends Component {
           </h2>
           <img src={logo} alt="logo" height='110px'/>
         </div>
-        <p className="App-intro">
-          <h2>Realizado por:</h2>
-          <h4>Sebastian Londoño Alvarez</h4>
-          <h4>Joan Alberto Marin Bustamante</h4>
-          <h4>Joan Sebastian Morales</h4>
-        </p>
       </div>
     );
   }

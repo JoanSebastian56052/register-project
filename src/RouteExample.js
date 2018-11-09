@@ -2,6 +2,8 @@ import React from 'react'
 import Registro from './Registro';
 import App from './App';
 import logo from './logo-rutan.png';
+import FrequentsQuestions from './FrequentsQuestions.js';
+import Login from './Login.js';
 import {
   BrowserRouter as Router,
   Route,
@@ -25,14 +27,21 @@ const RouteExample = () => (
           </div> 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
             <ul className="nav navbar-nav"> 
-              <li><Link to="/">VENTANILLA UNICA DE PROYECTOS</Link></li>
-              <li><Link to="/register">Registro</Link></li>
-            </ul> 
+              <li><Link to="/">Inicio</Link></li>
+              <li><Link to="/Register_Project">Registro</Link></li>
+              <li><Link to="/Frequents_Questions">Preguntas Frecuentes</Link></li>
+              <li className="login">
+                  <Link to="/Login">Ingresar</Link>
+              </li>
+            </ul>
+
           </div>
         </div>
       </nav>
       <Route exact path="/" component={App}/>
-      <Route path="/register" component={Registro}/>
+      <Route path="/Register_Project" component={Registro}/>
+      <Route path="/Frequents_Questions/" component={FrequentsQuestions}/>
+      <Route path="/Login/" component={Login}/>
     </div>
   </Router>
 )

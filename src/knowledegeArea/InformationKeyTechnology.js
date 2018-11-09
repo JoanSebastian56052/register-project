@@ -31,7 +31,7 @@ export default [
 	{idE: "2", idC:"1", idKET: "2", name: "NANOBIOINGENIERIA"},
 	{idE: "2", idC:"1", idKET: "3", name: "NANOBIOMATERIALES"},
 	{idE: "2", idC:"1", idKET: "4", name: "COMPUTACIÓN BIOMÉDICA Y BIOINFORMÁTICA"},
-	{idE: "2", idC:"1", idKET: "1", name: "DISPOSITIVOS MEDICOS AVANZADOS"},
+	{idE: "2", idC:"2", idKET: "1", name: "DISPOSITIVOS MEDICOS AVANZADOS"},
 	{idE: "2", idC:"2", idKET: "2", name: "BIOROBOTICA"},
 	{idE: "2", idC:"2", idKET: "3", name: "IMAGEN BIOMEDICA"},
 	{idE: "2", idC:"2", idKET: "4", name: "BIONICA"},
