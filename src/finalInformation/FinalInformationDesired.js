@@ -8,7 +8,7 @@ class FinalInformationDesired extends Component {
 		let group1 = "";
 		let group2 = "";
 		let group3 = "";
-		let termino;
+		let termino = "";
 		let id = "8" + this.props.datadesired.group1;
 		UserOptions.forEach((option) => {
 			if(id === option.id) {

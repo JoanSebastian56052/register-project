@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import swal from 'sweetalert2'
+import Files from 'react-files'
+
+const file = []
 
 class InformationEntities extends Component {
 	constructor(props) {
@@ -16,7 +20,10 @@ class InformationEntities extends Component {
 			nameEntityA: "",
 			nitEntityA: "",
 			nameGroup: "",
-			isfull: false
+			isfull: false,
+			id: "",
+			isId: true,
+			files: null,
 		}
 		this.takeNature = this.takeNature.bind(this);
 		this.takeType = this.takeType.bind(this);
@@ -31,7 +38,17 @@ class InformationEntities extends Component {
 		this.takeNameGroup = this.takeNameGroup.bind(this);
 		this.isComplete = this.isComplete.bind(this);
 		this.esNumerico = this.esNumerico.bind(this);
+		this.getRandomArbitrary = this.getRandomArbitrary.bind(this);
+        this.onFilesChange = this.onFilesChange.bind(this);
+
 	}
+	onFilesChange(files) {
+    	this.setState({files: files})
+  	}
+	 
+	  onFilesError(error, file) {
+	    console.log('error code ' + error.code + ': ' + error.message)
+	  }
 	esNumerico(newValue) {
 		let numerico = false;
 		if (!/^([0-9])*$/.test(newValue)) {
@@ -39,6 +56,13 @@ class InformationEntities extends Component {
 			numerico = true;
 		}
 		return numerico;
+	}
+	getRandomArbitrary() {
+		if(this.state.isId) {
+			let min = 0;
+			let max = 1000000000;
+			this.setState({isId: false, id: Math.floor(Math.random() * (max - min)) + min});
+		}
 	}
 
 	takeNature(e) {
@@ -97,45 +121,138 @@ class InformationEntities extends Component {
 										if(this.state.nameEntityA.length !== 0 ) {
 											if(this.state.nitEntityA.length !== 0 && this.esNumerico(this.state.nitEntityA) === true) {
 												if (this.state.nameGroup.length !== 0) {
-													this.setState({isfull: true});
-													this.props.getIsFullEntities(this.state);
+													if(this.state.files !== null) {
+														if(this.state.files.length === 3) {
+															this.setState({isfull: true});
+															this.props.getIsFullEntities(this.state);
+															swal({
+															  position: 'center',
+															  type: 'success',
+															  title: 'La informacion de la entidades ha sido guardado exitosamente',
+															  showConfirmButton: false,
+															  timer: 1500
+															})
+														} else {
+															swal({
+															  type: 'error',
+															  title: 'Oops...',
+															  text: 'Faltan archivos, adjunte los archivos por favor',
+															})
+														}
+													} else {
+														swal({
+														  type: 'error',
+														  title: 'Oops...',
+														  text: 'Faltan los archivos, adjunte los archivos por favor',
+														})
+													}
+													
 												} else {
-													alert("El campo nombre del grupo asociado es obligatorio");
+													swal({
+													  type: 'error',
+													  title: 'Oops...',
+													  text: 'El campo nombre del grupo asociado es obligatorio!!!',
+													})
 												}
 											} else {
-												alert("El campo nit de la entidad asociada es obligatorio");
+												swal({
+												  type: 'error',
+												  title: 'Oops...',
+												  text: 'El campo nit de la entidad asociada es obligatorio!!!',
+												})
 											}
 										} else {
-											alert("El campo nombre de la entidad asociada es obligatorio");
+											swal({
+											  type: 'error',
+											  title: 'Oops...',
+											  text: 'El campo nombre de la entidad asociada es obligatorio!!!',
+											})
 										}
 									} else {
-										alert("El campo telefono del lider del proyecto es obligatorio o debes ingresar un numero de telefono valido");
+										swal({
+										  type: 'error',
+										  title: 'Oops...',
+										  text: 'El campo telefono del lider del proyecto es obligatorio o debes ingresar un numero de telefono valido!!!',
+										})
 									}
 								} else {
-									alert("El campo e-mail del lider del proyecto es obligatorio");
+									swal({
+									  type: 'error',
+									  title: 'Oops...',
+									  text: 'El campo e-mail del lider del proyecto es obligatorio!!!',
+									})
 								}
 							} else {
-								alert("El campo ocupacion del lider del proyecto es obligatorio");
+								swal({
+								  type: 'error',
+								  title: 'Oops...',
+								  text: 'El campo ocupacion del lider del proyecto es obligatorio!!!',
+								})
 							}
 						} else {
-							alert("El campo nombre del lider del proyecto es obligatorio");
+							swal({
+							  type: 'error',
+							  title: 'Oops...',
+							  text: 'El campo nombre del lider del proyecto es obligatorio!!!',
+							})
 						}
 					} else {
-						alert("El campo NIT de la entidad proponente del proyecto es obligatorio o debes ingresar un dato numerico");
+						swal({
+						  type: 'error',
+						  title: 'Oops...',
+						  text: 'El campo NIT de la entidad proponente del proyecto es obligatorio o debes ingresar un dato numerico!!!',
+						})
 					}
 				} else {
-					alert("El campo nombre de la entidad proponente del proyecto es obligatorio");
+					swal({
+					  type: 'error',
+					  title: 'Oops...',
+					  text: 'El campo nombre de la entidad proponente del proyecto es obligatorio!!!',
+					})
 				}
 			} else {
-				alert("El campo tipo de la entidad proponente del proyecto es obligatorio");
+				swal({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: 'El campo tipo de la entidad proponente del proyecto es obligatorio!!!',
+				})
 			}
 		} else {
-			alert("El campo naturaleza de la entidad proponente del proyecto es obligatorio");
+			swal({
+			  type: 'error',
+			  title: 'Oops...',
+			  text: 'El campo naturaleza de la entidad proponente del proyecto es obligatorio!!!',
+			})
 		}
 
 	}
+	obtenerNombres(files) {
+		let nombres = []
+		let intentos = files[0]
+		return intentos
+	}
 
 	render() {
+		this.getRandomArbitrary();
+		let file = [];
+		if(this.state.file !== null) {
+			file.push(this.state.files)
+		}
+		let nombres = this.obtenerNombres(file)
+		console.log(nombres)
+		let archivos = []
+		if(nombres !== null) {
+			let termino = null
+			nombres.forEach((nombre) => {
+				if(termino != nombre.id) {
+					archivos.push(<button>{nombre.name}</button>)
+					archivos.push(<br/>)
+					console.log(nombre.name)
+					console.log(this.state.files)
+				}
+				termino = nombre.name
+			})
+		}
 		return(
 				<div>
 					<tr>
@@ -143,7 +260,7 @@ class InformationEntities extends Component {
 							&nbsp;&nbsp;<font color="red">*</font>ID Proyecto: 
 						</td>
 						<td>
-							<input type="text" placeholder="1" />
+							<input type="text" value={this.state.id}/>
 						</td>
 					</tr>
 					<tr>
@@ -243,6 +360,31 @@ class InformationEntities extends Component {
 						</td>
 						<td>
 							<input type="text" placeholder="name" onChange={this.takeNameGroup} value={this.state.nameGroup}/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							&nbsp;&nbsp;<font color="red">*</font>Anexos: Cámara de comercio, RUT Actualizado y Cédula del RP:
+						</td>
+						<td>
+							<div className="MenuPrincipal">
+									<div className="submenu">
+										{archivos}
+										<Files
+								          className='files-dropzone'
+								          onChange={this.onFilesChange}
+								          onError={this.onFilesError}
+								          accepts={['.pdf']}
+								          multiple
+								          maxFiles={3}
+								          maxFileSize={10000000}
+								          minFileSize={3}
+								          clickable
+								        >
+								          <button>Cargar Archivos</button>
+								        </Files>
+								       </div>
+						      </div>
 						</td>
 					</tr>
 					<br/>

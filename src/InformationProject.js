@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import swal from 'sweetalert2'
 import InformationEcosystem from './knowledegeArea/InformationEcosystem.js';
 import InformationInnovationCell from './knowledegeArea/InformationInnovationCell.js';
 import InformationKET from './knowledegeArea/InformationKeyTechnology.js';
@@ -91,35 +92,82 @@ class InformationProject extends Component {
 												this.setState({isfull: true});
 												let newValue = this.state;
 												this.props.getIsFullProjects(newValue);
+												swal({
+												  position: 'center',
+												  type: 'success',
+												  title: 'La informacion de la entidades ha sido guardado exitosamente',
+												  showConfirmButton: false,
+												  timer: 1500
+												})
 											}  else {
-												alert("El campo resultados esperados del proyecto es obligatorio");
+												swal({
+												  type: 'error',
+												  title: 'Oops...',
+												  text: 'El campo resultados esperados del proyecto es obligatorio!!!',
+												})
 											}
 										} else {
-											alert("El campo objetivo general del proyecto es obligatorio");
+											swal({
+												  type: 'error',
+												  title: 'Oops...',
+												  text: 'El campo objetivo general del proyecto es obligatorio!!!',
+												})
 										}
 									} else {
-										alert("El campo presupuesto del proyecto es obligatorio");
+										swal({
+										  type: 'error',
+										  title: 'Oops...',
+										  text: 'El campo presupuesto del proyecto es obligatorio!!!',
+										})
 									}
 								} else {
-									alert("El campo duracion del proyecto es obligatorio");
+									swal({
+									  type: 'error',
+									  title: 'Oops...',
+									  text: 'El campo duracion del proyecto es obligatorio!!!',
+									})
 								}
 							} else {
-								alert("El campo  del proyecto es obligatorio");
+								swal({
+								  type: 'error',
+								  title: 'Oops...',
+								  text: 'Seleccione un Area de conocimiento de la tecnología a desarrollar o usar KEY ENABLING TECHNOLOGY!!!',
+								})
 							}
 						} else {
-							alert("El campo  del proyecto es obligatorio");
+							swal({
+							  type: 'error',
+							  title: 'Oops...',
+							  text: 'Seleccione un Area de conocimiento de la tecnología a desarrollar o usar INNOVATION CELL!!!',
+							})
 						}
 					} else {
-						alert("El campo  del proyecto es obligatorio");
+						swal({
+						  type: 'error',
+						  title: 'Oops...',
+						  text: 'Seleccione un Area de conocimiento de la tecnología a desarrollar o usar ECOSYSTEM!!!',
+						})
 					}
 				} else {
-					alert("El campo problema a resolver del proyecto es obligatorio");
+					swal({
+					  type: 'error',
+					  title: 'Oops...',
+					  text: 'El campo descripcion del proyecto es obligatorio!!!',
+					})
 				}
 			} else {
-				alert("El campo descripcion del proyecto es obligatorio");
+				swal({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: 'El campo problema a resolver del proyecto es obligatorio!!!',
+				})
 			}
 		} else {
-			alert("El campo nombre del proyecto es obligatorio");
+			swal({
+			  type: 'error',
+			  title: 'Oops...',
+			  text: 'El campo nombre o iniciativa del proyecto es obligatorio!!!',
+			})
 		}
 	}
 

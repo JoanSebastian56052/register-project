@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import swal from 'sweetalert2'
+
 
 class InformationDesiredState extends Component {
 	constructor(props) {
@@ -45,20 +47,47 @@ class InformationDesiredState extends Component {
 							this.setState({isfull: true});
 							let newValue = this.state;
 							this.props.getIsFullDesired(newValue);
+							swal({
+							  position: 'center',
+							  type: 'success',
+							  title: 'La informacion de la entidades ha sido guardado exitosamente',
+							  showConfirmButton: false,
+							  timer: 1500
+							})
 						} else {
-							alert("El campo Limitaciones para el desarrollo del proyecto es obligatorio");
+							swal({
+							  type: 'error',
+							  title: 'Oops...',
+							  text: 'El campo Limitaciones para el desarrollo del proyecto es obligatorio!!!',
+							})
 						}
 					} else {
-						alert("El campo Grado de desarrollo de la Tecnología al cual se desea llegar con el proyecto: es obligatorio");
+						swal({
+						  type: 'error',
+						  title: 'Oops...',
+						  text: 'El campo Grado de desarrollo de la Tecnología al cual se desea llegar con el proyecto: es obligatorio!!!',
+						})
 					}	
 				} else {
-					alert("El campo Cuál es su objetivo con el desarrollo del proyecto en el plazo establecido? es obligatorio");
+					swal({
+					  type: 'error',
+					  title: 'Oops...',
+					  text: 'El campo Cuál es su objetivo con el desarrollo del proyecto en el plazo establecido? es obligatorio!!!',
+					})
 				}
 			}else {
-				alert("El campo Estado jurídico del desarrollo del proyecto: es obligatorio");
+				swal({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: 'El campo Estado jurídico del desarrollo del proyecto: es obligatorio!!!',
+				})
 			}
 		} else {
-			alert("El campo Grado de novedad del desarrollo es obligatorio");
+			swal({
+			  type: 'error',
+			  title: 'Oops...',
+			  text: 'El campo Grado de novedad del desarrollo es obligatorio!!!',
+			})
 		}
 	}
 

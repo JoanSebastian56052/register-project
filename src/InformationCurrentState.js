@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import swal from 'sweetalert2'
+
 
 class InformationCurrentState extends Component {
 	constructor(props) {
@@ -58,25 +60,62 @@ class InformationCurrentState extends Component {
 									this.setState({isfull: true});
 									let newValue = this.state;
 									this.props.getIsFullCurrent(newValue);
+									swal({
+									  position: 'center',
+									  type: 'success',
+									  title: 'La informacion de la entidades ha sido guardado exitosamente',
+									  showConfirmButton: false,
+									  timer: 1500
+									})
 								} else {
-									alert("Debes seleccionar una opcion en: Estado actual en la Fabricación / cadena de suministro");
+									swal({
+									  type: 'error',
+									  title: 'Oops...',
+									  text: 'Debes seleccionar una opcion en: Estado actual en la Fabricación / cadena de suministro!!!',
+									})
 								}
 							} else {
-								alert("Debes seleccionar una opcion en: Estado actual con miras  al mercado");
+								swal({
+								  type: 'error',
+								  title: 'Oops...',
+								  text: 'Debes seleccionar una opcion en: Estado actual con miras  al mercado!!!',
+								})
 							}
 						} else {
-							alert("Debes seleccionar una opcion en: Conformación del Equipo");
+							swal({
+							  type: 'error',
+							  title: 'Oops...',
+							  text: 'Debes seleccionar una opcion en: Conformación del Equipo!!!',
+							})
 						}
 					} else {
-						alert("Debes seleccionar una opcion en: Panorama competitivo actual / Conocimiento del mercado");
+						swal({
+						  type: 'error',
+						  title: 'Oops...',
+						  text: 'Debes seleccionar una opcion en: Panorama competitivo actual / Conocimiento del mercado!!!',
+						})
 					}
 				} else {
-					alert("Debes seleccionar una opcion en: Definición/diseño del producto:");
+					swal({
+					  type: 'error',
+					  title: 'Oops...',
+					  text: 'Debes seleccionar una opcion en: Definición/diseño del producto!!!',
+					})
 				}
 			} else {
+				swal({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: '!!!',
+				})
 				alert("Debes seleccionar una opcion en: Grado de desarrollo del producto, servicios o proceso");
 			}
 		} else {
+			swal({
+			  type: 'error',
+			  title: 'Oops...',
+			  text: '!!!',
+			})
 			alert("Debes seleccionar una opcion en: Grado de desarrollo actual de la Tecnología");
 		}
 
